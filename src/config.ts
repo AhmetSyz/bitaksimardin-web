@@ -16,6 +16,11 @@ export const site = {
   address: 'Cumhuriyet Meydanı, Artuklu / Mardin',
   location: { lat: 37.3129, lng: 40.7351 },
   hours: '7 gün 24 saat açık',
+  /**
+   * Google yorum linki. Google İşletme Profili → "Yorum iste" / "Yorum formu paylaş"
+   * bölümünden alınır. Örn: https://g.page/r/XXXXXXXX/review
+   */
+  googleReviewUrl: 'https://g.page/r/BURAYA_ISLETME_KODU/review',
   description:
     "Mardin'de 7/24 güvenli ve hızlı taksi hizmeti. Havaalanı transferi, şehir içi ulaşım ve tur hizmeti için hemen arayın veya WhatsApp'tan yazın.",
 };
