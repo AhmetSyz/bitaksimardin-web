@@ -1,0 +1,37 @@
+---
+import Icon from './Icon.astro';
+import { site, mapsHref, directionsHref, mapEmbedSrc } from '../config';
+---
+
+<section id="konum" class="scroll-mt-20 pb-24 md:pb-32">
+  <div class="mx-auto max-w-6xl px-5">
+    <div class="reveal mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+      <div>
+        <span class="section-eyebrow">Konum</span>
+        <h2 class="text-3xl font-bold tracking-tight text-white md:text-4xl">Bizi burada bulabilirsiniz</h2>
+        <p class="mt-3 flex items-center gap-2 text-slate-400">
+          <Icon name="map" class="size-4 text-taxi-400" />
+          {site.address}
+        </p>
+      </div>
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <a href={directionsHref} target="_blank" rel="noopener" class="btn btn-primary">
+          <Icon name="map" class="size-5" />
+          Yol Tarifi Al
+        </a>
+        <a href={mapsHref} target="_blank" rel="noopener" class="btn btn-ghost">Google Haritalar'da Aç</a>
+      </div>
+    </div>
+
+    <div class="reveal overflow-hidden rounded-[2rem] border border-white/10 bg-night-800 shadow-2xl shadow-black/40" style="--delay: 100ms">
+      <iframe
+        src={mapEmbedSrc}
+        title={`${site.name} konumu`}
+        class="block h-[380px] w-full md:h-[480px]"
+        style="filter: grayscale(0.25) contrast(1.05);"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+</section>

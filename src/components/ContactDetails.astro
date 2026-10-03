@@ -1,0 +1,37 @@
+---
+import Icon from './Icon.astro';
+import { site, telHref, whatsappHref, mapsHref } from '../config';
+
+const cards = [
+  { icon: 'phone', label: 'Telefon', value: site.phoneDisplay, href: telHref, cta: 'Hemen ara' },
+  { icon: 'whatsapp', label: 'WhatsApp', value: 'Mesaj gönderin', href: whatsappHref, cta: 'Yazışmaya başla', external: true },
+  { icon: 'map', label: 'Konum', value: site.address, href: mapsHref, cta: 'Haritada aç', external: true },
+  { icon: 'clock', label: 'Çalışma Saatleri', value: site.hours, href: telHref, cta: 'Her an ulaşın' },
+] as const;
+---
+
+<section class="py-20 md:py-28">
+  <div class="mx-auto grid max-w-6xl gap-5 px-5 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      cards.map((c, i) => (
+        <a
+          href={c.href}
+          target={'external' in c ? '_blank' : undefined}
+          rel={'external' in c ? 'noopener' : undefined}
+          class="reveal group rounded-3xl border border-white/5 bg-night-800/60 p-7 transition-all duration-500 hover:scale-[1.03] hover:border-taxi-500/30 hover:bg-night-800"
+          style={`--delay: ${i * 100}ms`}
+        >
+          <div class="mb-6 grid size-12 place-items-center rounded-2xl bg-taxi-500/10 text-taxi-400 ring-1 ring-taxi-500/20 transition-colors duration-500 group-hover:bg-taxi-500 group-hover:text-night-950">
+            <Icon name={c.icon} class="size-6" />
+          </div>
+          <p class="text-sm text-slate-400">{c.label}</p>
+          <p class="mt-1 text-lg font-semibold text-white">{c.value}</p>
+          <p class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-taxi-400">
+            {c.cta}
+            <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </p>
+        </a>
+      ))
+    }
+  </div>
+</section>

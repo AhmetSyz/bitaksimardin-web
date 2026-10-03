@@ -1,0 +1,44 @@
+---
+import Icon from './Icon.astro';
+import { site, telHref, whatsappHref, mapsHref } from '../config';
+---
+
+<section class="relative py-24 md:py-32">
+  <div class="mx-auto max-w-4xl px-5">
+    <div
+      class="reveal relative overflow-hidden rounded-[2rem] border border-taxi-500/20 bg-linear-to-br from-night-800 via-night-900 to-night-950 px-6 py-14 text-center sm:px-12 md:py-20"
+    >
+      <div class="pointer-events-none absolute -top-24 left-1/2 size-72 -translate-x-1/2 rounded-full bg-taxi-500/15 blur-3xl"></div>
+
+      <span class="section-eyebrow relative">Hemen Ulaşın</span>
+      <h2 class="relative text-3xl font-bold tracking-tight text-white md:text-5xl">Taksiye mi ihtiyacınız var?</h2>
+      <p class="relative mx-auto mt-5 max-w-lg text-lg text-slate-400">
+        Hemen arayın ya da WhatsApp'tan konumunuzu gönderin. En kısa sürede yanınızdayız.
+      </p>
+
+      <a
+        href={telHref}
+        class="group relative mt-10 inline-flex items-center gap-3 text-3xl font-extrabold tracking-tight text-white transition-colors hover:text-taxi-400 sm:text-5xl"
+      >
+        <Icon name="phone" class="size-7 text-taxi-400 transition-transform duration-300 group-hover:rotate-12 sm:size-10" />
+        {site.phoneDisplay}
+      </a>
+
+      <div class="relative mt-10 flex flex-col justify-center gap-4 sm:flex-row">
+        <a href={telHref} class="btn btn-primary">
+          <Icon name="phone" class="size-5" />
+          Hemen Ara
+        </a>
+        <a href={whatsappHref} target="_blank" rel="noopener" class="btn btn-whatsapp">
+          <Icon name="whatsapp" class="size-5" />
+          WhatsApp'tan Yaz
+        </a>
+      </div>
+
+      <div class="relative mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-slate-400">
+        <span class="flex items-center gap-2"><Icon name="clock" class="size-4 text-taxi-400" /> 7 gün 24 saat</span>
+        <a href={mapsHref} target="_blank" rel="noopener" class="flex items-center gap-2 transition-colors hover:text-taxi-400"><Icon name="map" class="size-4 text-taxi-400" /> {site.address}</a>
+      </div>
+    </div>
+  </div>
+</section>

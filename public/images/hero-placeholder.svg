@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <!-- Placeholder: gece şehir silueti. Gerçek bir fotoğrafla (ör. /images/hero.jpg) değiştirin. -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#060a14"/>
+      <stop offset="0.55" stop-color="#0d1730"/>
+      <stop offset="1" stop-color="#1a2440"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.72" cy="0.78" r="0.55">
+      <stop offset="0" stop-color="#f5c518" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#f5c518" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="win" width="22" height="26" patternUnits="userSpaceOnUse">
+      <rect x="6" y="6" width="6" height="8" rx="1" fill="#f5c518" opacity="0.55"/>
+    </pattern>
+    <pattern id="win2" width="30" height="34" patternUnits="userSpaceOnUse">
+      <rect x="10" y="10" width="7" height="10" rx="3.5" fill="#ffd970" opacity="0.4"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#sky)"/>
+  <rect width="1600" height="1000" fill="url(#glow)"/>
+  <circle cx="1280" cy="170" r="46" fill="#fef3c7" opacity="0.85"/>
+  <circle cx="1298" cy="158" r="44" fill="#0a1224"/>
+  <g fill="#fff" opacity="0.6">
+    <circle cx="120" cy="90" r="1.4"/><circle cx="340" cy="160" r="1"/><circle cx="560" cy="70" r="1.2"/>
+    <circle cx="780" cy="130" r="1"/><circle cx="980" cy="60" r="1.4"/><circle cx="1460" cy="110" r="1"/>
+    <circle cx="1540" cy="260" r="1.2"/><circle cx="220" cy="240" r="1"/><circle cx="680" cy="220" r="1"/>
+  </g>
+  <!-- uzak tepe ve taş evler -->
+  <path d="M0 640 C 300 520, 600 470, 900 500 S 1400 560, 1600 520 V1000 H0Z" fill="#111a2e"/>
+  <g fill="#162138">
+    <rect x="380" y="470" width="120" height="120"/><rect x="500" y="440" width="90" height="150"/>
+    <rect x="590" y="455" width="140" height="135"/><rect x="730" y="420" width="70" height="170"/>
+    <rect x="800" y="445" width="160" height="145"/><rect x="960" y="465" width="110" height="125"/>
+    <rect x="752" y="360" width="26" height="70"/><path d="M745 362 L765 330 L785 362Z"/>
+  </g>
+  <g fill="url(#win2)">
+    <rect x="380" y="470" width="120" height="120"/><rect x="500" y="440" width="90" height="150"/>
+    <rect x="590" y="455" width="140" height="135"/><rect x="800" y="445" width="160" height="145"/>
+    <rect x="960" y="465" width="110" height="125"/>
+  </g>
+  <!-- ön plan binalar -->
+  <path d="M0 760 C 400 700, 1000 690, 1600 740 V1000 H0Z" fill="#0b1222"/>
+  <g fill="#0e1628">
+    <rect x="40" y="560" width="150" height="260"/><rect x="200" y="610" width="120" height="210"/>
+    <rect x="1180" y="590" width="130" height="230"/><rect x="1320" y="540" width="170" height="280"/>
+    <rect x="1500" y="620" width="100" height="200"/>
+  </g>
+  <g fill="url(#win)">
+    <rect x="40" y="560" width="150" height="260"/><rect x="200" y="610" width="120" height="210"/>
+    <rect x="1180" y="590" width="130" height="230"/><rect x="1320" y="540" width="170" height="280"/>
+  </g>
+  <!-- yol ve far izleri -->
+  <path d="M0 860 H1600 V1000 H0Z" fill="#070b14"/>
+  <path d="M0 905 C 500 880, 1100 880, 1600 900" stroke="#f5c518" stroke-width="3" stroke-opacity="0.55" fill="none"/>
+  <path d="M0 925 C 500 905, 1100 905, 1600 925" stroke="#ef4444" stroke-width="2" stroke-opacity="0.35" fill="none"/>
+  <path d="M0 945 C 500 930, 1100 930, 1600 948" stroke="#fde68a" stroke-width="2" stroke-opacity="0.3" fill="none"/>
+</svg>

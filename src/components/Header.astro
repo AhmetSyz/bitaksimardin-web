@@ -1,0 +1,103 @@
+---
+import Icon from './Icon.astro';
+import { site, telHref } from '../config';
+
+const links = [
+  { href: '/', label: 'Ana Sayfa' },
+  { href: '/hakkimizda', label: 'Hakkımızda' },
+  { href: '/iletisim', label: 'İletişim' },
+];
+
+const current = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) => current === href;
+---
+
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-40 transition-all duration-300 data-[open=true]:bg-night-950 data-[scrolled=true]:border-b data-[scrolled=true]:border-white/5 data-[scrolled=true]:bg-night-950/80 data-[scrolled=true]:backdrop-blur-lg"
+>
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 md:h-20">
+    <a href="/" class="flex items-center gap-2.5 text-lg font-extrabold tracking-tight text-white">
+      <span class="grid size-9 place-items-center rounded-xl bg-taxi-500 text-night-950">
+        <Icon name="car" class="size-5" />
+      </span>
+      <span>{site.name.replace(site.city, '')}<span class="text-taxi-400">{site.city}</span></span>
+    </a>
+
+    <nav class="hidden items-center gap-8 md:flex" aria-label="Ana menü">
+      {
+        links.map((l) => (
+          <a
+            href={l.href}
+            aria-current={isActive(l.href) ? 'page' : undefined}
+            class="relative text-sm font-medium text-slate-300 transition-colors hover:text-taxi-400 aria-[current=page]:text-taxi-400"
+          >
+            {l.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a href={telHref} class="btn btn-primary hidden px-5! py-2.5! text-sm md:inline-flex">
+      <Icon name="phone" class="size-4" />
+      {site.phoneDisplay}
+    </a>
+
+    <button
+      id="menu-toggle"
+      type="button"
+      class="group grid size-10 place-items-center rounded-xl border border-white/10 text-white md:hidden"
+      aria-label="Menüyü aç"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="relative block h-3.5 w-5">
+        <span class="absolute top-0 left-0 h-0.5 w-5 rounded bg-current transition-all duration-300 group-aria-expanded:top-1.5 group-aria-expanded:rotate-45"></span>
+        <span class="absolute top-1.5 left-0 h-0.5 w-5 rounded bg-current transition-opacity duration-300 group-aria-expanded:opacity-0"></span>
+        <span class="absolute top-3 left-0 h-0.5 w-5 rounded bg-current transition-all duration-300 group-aria-expanded:top-1.5 group-aria-expanded:-rotate-45"></span>
+      </span>
+    </button>
+  </div>
+
+  <nav
+    id="mobile-menu"
+    class="grid grid-rows-[0fr] border-white/5 bg-night-950 transition-[grid-template-rows] duration-300 ease-out data-[open=true]:grid-rows-[1fr] data-[open=true]:border-b md:hidden"
+    aria-label="Mobil menü"
+  >
+    <ul class="overflow-hidden px-5">
+      {
+        links.map((l) => (
+          <li class="border-t border-white/5 first:border-t-0">
+            <a
+              href={l.href}
+              aria-current={isActive(l.href) ? 'page' : undefined}
+              class="flex items-center justify-between py-4 text-lg font-medium text-slate-200 aria-[current=page]:text-taxi-400"
+            >
+              {l.label}
+              <span class="text-slate-600">→</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+
+  const onScroll = () => header?.setAttribute('data-scrolled', String(window.scrollY > 24));
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  const setOpen = (open: boolean) => {
+    toggle?.setAttribute('aria-expanded', String(open));
+    toggle?.setAttribute('aria-label', open ? 'Menüyü kapat' : 'Menüyü aç');
+    menu?.setAttribute('data-open', String(open));
+    header?.setAttribute('data-open', String(open));
+  };
+  toggle?.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  document.addEventListener('keydown', (e) => e.key === 'Escape' && setOpen(false));
+</script>

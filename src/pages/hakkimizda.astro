@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
+import About from '../components/About.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import { site, telHref } from '../config';
+import { taxiPhotos } from '../lib/photos';
+---
+
+<Layout
+  title={`Hakkımızda | ${site.name}`}
+  description={`${site.city}'de yılların tecrübesiyle güvenli taksi hizmeti. Aracımızı ve şoförümüzü tanıyın.`}
+>
+  <Header />
+  <main>
+    <PageHero
+      eyebrow="Araç & Şoför"
+      title="Güvenle yola çıkmanız için buradayız"
+      text={`${site.city}'in sokaklarını avucumuzun içi gibi bilen tecrübeli şoförümüz ve bakımlı aracımızla her yolculukta aynı özen.`}
+      photos={[taxiPhotos[0], taxiPhotos[1]]}
+    >
+      <a href={telHref} class="btn btn-primary">
+        <Icon name="phone" class="size-5" />
+        Hemen Ara
+      </a>
+    </PageHero>
+    <About />
+    <CallToAction />
+  </main>
+  <Footer />
+</Layout>

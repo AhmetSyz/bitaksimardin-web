@@ -1,0 +1,54 @@
+---
+import Icon from './Icon.astro';
+
+const services = [
+  {
+    icon: 'clock',
+    title: '7/24 Hizmet',
+    text: 'Gece yarısı, sabahın erken saatleri ya da bayram günü fark etmez. Bir telefon kadar yakınız.',
+  },
+  {
+    icon: 'plane',
+    title: 'Havaalanı Transferi',
+    text: 'Mardin Prof. Dr. Aziz Sancar Havalimanı’na zamanında ve sorunsuz transfer. Uçuşunuzu takip ediyoruz.',
+  },
+  {
+    icon: 'snow',
+    title: 'Temiz ve Klimalı Araç',
+    text: 'Her yolculuk öncesi temizlenen, bakımlı ve klimalı aracımızla konforlu bir yolculuk.',
+  },
+  {
+    icon: 'bolt',
+    title: 'Şehir İçi Hızlı Ulaşım',
+    text: 'Şehrin sokaklarını avucumuzun içi gibi biliyoruz. En kısa rotayla, trafiğe takılmadan.',
+  },
+] as const;
+---
+
+<section id="hizmetler" class="relative scroll-mt-20 py-24 md:py-32">
+  <div class="mx-auto max-w-6xl px-5">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <span class="section-eyebrow">Neden Biz?</span>
+      <h2 class="text-3xl font-bold tracking-tight text-white md:text-5xl">Yolculuğunuz bizim önceliğimiz</h2>
+      <p class="mt-5 text-lg text-slate-400">Basit, şeffaf ve güvenilir. İhtiyacınız olan her an yanınızdayız.</p>
+    </div>
+
+    <div class="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        services.map((s, i) => (
+          <article
+            class="reveal group relative overflow-hidden rounded-3xl border border-white/5 bg-night-800/60 p-7 transition-all duration-500 ease-out hover:scale-[1.03] hover:border-taxi-500/30 hover:bg-night-800 hover:shadow-2xl hover:shadow-taxi-500/10"
+            style={`--delay: ${i * 100}ms`}
+          >
+            <div class="pointer-events-none absolute -top-20 -right-20 size-40 rounded-full bg-taxi-500/0 blur-3xl transition-colors duration-500 group-hover:bg-taxi-500/20" />
+            <div class="mb-6 grid size-14 place-items-center rounded-2xl bg-taxi-500/10 text-taxi-400 ring-1 ring-taxi-500/20 transition-all duration-500 group-hover:bg-taxi-500 group-hover:text-night-950">
+              <Icon name={s.icon} class="size-7" />
+            </div>
+            <h3 class="text-xl font-semibold text-white">{s.title}</h3>
+            <p class="mt-3 leading-relaxed text-slate-400">{s.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

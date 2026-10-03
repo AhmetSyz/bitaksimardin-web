@@ -1,0 +1,45 @@
+---
+import Icon from './Icon.astro';
+import { site, telHref, whatsappHref, mapsHref } from '../config';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-white/5 py-10">
+  <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-5 px-5 text-sm text-slate-500 md:flex-row">
+    <p>© {year} {site.name}. Tüm hakları saklıdır.</p>
+    <nav class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2" aria-label="Alt menü">
+      <a href="/hakkimizda" class="transition-colors hover:text-taxi-400">Hakkımızda</a>
+      <a href="/iletisim" class="transition-colors hover:text-taxi-400">İletişim</a>
+      <a href={mapsHref} target="_blank" rel="noopener" class="transition-colors hover:text-taxi-400">Konum</a>
+      <a href={telHref} class="transition-colors hover:text-taxi-400">{site.phoneDisplay}</a>
+      <a href={whatsappHref} target="_blank" rel="noopener" class="transition-colors hover:text-whatsapp">WhatsApp</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- Mobil: her an erişilebilir sabit arama çubuğu -->
+<div
+  class="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-night-950/90 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-lg md:hidden"
+>
+  <div class="grid grid-cols-[1fr_auto] gap-3">
+    <a href={telHref} class="btn btn-primary animate-pulse-ring py-3.5! text-base">
+      <Icon name="phone" class="size-5" />
+      Hemen Ara
+    </a>
+    <a href={whatsappHref} target="_blank" rel="noopener" class="btn btn-whatsapp px-5! py-3.5!" aria-label="WhatsApp'tan yaz">
+      <Icon name="whatsapp" class="size-6" />
+    </a>
+  </div>
+</div>
+
+<!-- Masaüstü: yüzen WhatsApp butonu -->
+<a
+  href={whatsappHref}
+  target="_blank"
+  rel="noopener"
+  aria-label="WhatsApp'tan yaz"
+  class="fixed right-6 bottom-6 z-50 hidden size-14 place-items-center rounded-full bg-whatsapp text-white shadow-xl shadow-whatsapp/30 transition-transform duration-300 hover:scale-110 md:grid"
+>
+  <Icon name="whatsapp" class="size-7" />
+</a>

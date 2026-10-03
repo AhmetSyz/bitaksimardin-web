@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import PageHero from '../components/PageHero.astro';
+import ContactDetails from '../components/ContactDetails.astro';
+import MapSection from '../components/MapSection.astro';
+import Footer from '../components/Footer.astro';
+import Icon from '../components/Icon.astro';
+import { site, telHref, whatsappHref } from '../config';
+import { taxiPhotos } from '../lib/photos';
+
+// Hakkımızda sayfasından farklı fotoğraflar görünsün diye listenin devamından alınır.
+const photos = taxiPhotos.length > 2 ? [taxiPhotos[2], taxiPhotos[3]] : [taxiPhotos[0], taxiPhotos[1]];
+---
+
+<Layout
+  title={`İletişim | ${site.name}`}
+  description={`${site.name} iletişim: ${site.phoneDisplay}. WhatsApp'tan yazın veya konumumuza göz atın. ${site.hours}.`}
+>
+  <Header />
+  <main>
+    <PageHero
+      eyebrow="İletişim"
+      title="Bir telefon kadar yakınız"
+      text="Arayın, WhatsApp'tan konumunuzu gönderin ya da durağımıza uğrayın. Günün her saati hizmetinizdeyiz."
+      photos={photos}
+    >
+      <div class="flex flex-col gap-4 sm:flex-row">
+        <a href={telHref} class="btn btn-primary">
+          <Icon name="phone" class="size-5" />
+          {site.phoneDisplay}
+        </a>
+        <a href={whatsappHref} target="_blank" rel="noopener" class="btn btn-whatsapp">
+          <Icon name="whatsapp" class="size-5" />
+          WhatsApp
+        </a>
+      </div>
+    </PageHero>
+    <ContactDetails />
+    <MapSection />
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,98 @@
+---
+import { getImage } from 'astro:assets';
+import PhotoFrame from './PhotoFrame.astro';
+import { taxiPhotos } from '../lib/photos';
+
+interface Props {
+  limit?: number;
+}
+
+const { limit = 6 } = Astro.props;
+const photos = taxiPhotos.slice(0, limit);
+
+// Büyük görünüm (lightbox) için ayrıca 1600px genişlikte bir sürüm üretilir.
+const items = await Promise.all(
+  photos.map(async (photo) => ({
+    photo,
+    large: await getImage({ src: photo.src, width: 1600, format: 'webp', quality: 82 }),
+  })),
+);
+// Henüz fotoğraf yoksa düzen görünsün diye 3 placeholder kart göster.
+const placeholders = items.length === 0 ? 3 : 0;
+---
+
+<section id="galeri" class="relative scroll-mt-20 py-24 md:py-32">
+  <div class="mx-auto max-w-6xl px-5">
+    <div class="reveal mx-auto max-w-2xl text-center">
+      <span class="section-eyebrow">Aracımız</span>
+      <h2 class="text-3xl font-bold tracking-tight text-white md:text-5xl">Temiz, bakımlı, konforlu</h2>
+      <p class="mt-5 text-lg text-slate-400">Yolculuğunuzu yapacağınız aracı yakından görün.</p>
+    </div>
+
+    <div class="mt-16 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3">
+      {
+        items.map(({ photo, large }, i) => (
+          <a
+            href={large.src}
+            data-lightbox
+            data-alt={photo.alt}
+            class="reveal group relative block overflow-hidden rounded-2xl border border-white/5 sm:rounded-3xl"
+            style={`--delay: ${(i % 3) * 100}ms`}
+            aria-label={`${photo.alt} (büyüt)`}
+          >
+            <PhotoFrame
+              photo={photo}
+              sizes="(min-width: 1024px) 360px, 45vw"
+              class="aspect-[3/4] [&_img]:transition-transform [&_img]:duration-700 [&_img]:ease-out group-hover:[&_img]:scale-105"
+            />
+            <div class="pointer-events-none absolute inset-0 bg-linear-to-t from-night-950/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          </a>
+        ))
+      }
+      {
+        Array.from({ length: placeholders }, (_, i) => (
+          <div class="reveal" style={`--delay: ${i * 100}ms`}>
+            <PhotoFrame sizes="360px" class="aspect-[3/4] rounded-2xl border border-white/5 sm:rounded-3xl" />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<dialog
+  id="lightbox"
+  class="m-auto max-h-none max-w-none bg-transparent p-0 backdrop:bg-night-950/90 backdrop:backdrop-blur-sm"
+>
+  <form method="dialog" class="relative">
+    <img id="lightbox-img" src="" alt="" class="max-h-[88svh] max-w-[92vw] rounded-2xl object-contain shadow-2xl" />
+    <button
+      class="absolute top-3 right-3 grid size-10 place-items-center rounded-full bg-night-950/80 text-white transition-colors hover:bg-taxi-500 hover:text-night-950"
+      aria-label="Kapat"
+    >
+      <svg class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M18 6 6 18M6 6l12 12"></path>
+      </svg>
+    </button>
+  </form>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('lightbox') as HTMLDialogElement | null;
+  const img = document.getElementById('lightbox-img') as HTMLImageElement | null;
+
+  document.querySelectorAll<HTMLAnchorElement>('[data-lightbox]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      if (!dialog || !img || typeof dialog.showModal !== 'function') return;
+      e.preventDefault();
+      img.src = link.href;
+      img.alt = link.dataset.alt ?? '';
+      dialog.showModal();
+    });
+  });
+
+  // Fotoğrafın dışına tıklayınca kapat
+  dialog?.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+</script>

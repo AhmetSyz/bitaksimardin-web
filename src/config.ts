@@ -1,0 +1,27 @@
+// Sitenin tüm iletişim bilgileri tek yerden yönetilir.
+// Telefon numarasını değiştirmek için yalnızca bu dosyayı düzenlemeniz yeterli.
+
+export const site = {
+  name: 'Bi Taksi Mardin',
+  city: 'Mardin',
+  driver: 'Ahmet Bey',
+  /** Ekranda görünen format */
+  phoneDisplay: '0532 123 45 67',
+  /** tel: linki için uluslararası format (boşluksuz) */
+  phoneE164: '+905321234567',
+  /** WhatsApp için başında + olmadan ülke koduyla */
+  whatsapp: '905321234567',
+  whatsappMessage: 'Merhaba, taksi çağırmak istiyorum. Konumum: ',
+  /** Durak / buluşma noktası. Gerçek adres ve koordinatlarla değiştirin. */
+  address: 'Cumhuriyet Meydanı, Artuklu / Mardin',
+  location: { lat: 37.3129, lng: 40.7351 },
+  hours: '7 gün 24 saat açık',
+  description:
+    "Mardin'de 7/24 güvenli ve hızlı taksi hizmeti. Havaalanı transferi, şehir içi ulaşım ve tur hizmeti için hemen arayın veya WhatsApp'tan yazın.",
+};
+
+export const telHref = `tel:${site.phoneE164}`;
+export const whatsappHref = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(site.whatsappMessage)}`;
+export const mapsHref = `https://www.google.com/maps/search/?api=1&query=${site.location.lat},${site.location.lng}`;
+export const directionsHref = `https://www.google.com/maps/dir/?api=1&destination=${site.location.lat},${site.location.lng}`;
+export const mapEmbedSrc = `https://www.google.com/maps?q=${site.location.lat},${site.location.lng}&z=16&hl=tr&output=embed`;
