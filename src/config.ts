@@ -6,11 +6,11 @@ export const site = {
   city: 'Mardin',
   driver: 'Ahmet Bey',
   /** Ekranda görünen format */
-  phoneDisplay: '0532 123 45 67',
+  phoneDisplay: '0539 398 16 12',
   /** tel: linki için uluslararası format (boşluksuz) */
-  phoneE164: '+905321234567',
+  phoneE164: '+905393981612',
   /** WhatsApp için başında + olmadan ülke koduyla */
-  whatsapp: '905321234567',
+  whatsapp: '905393981612',
   whatsappMessage: 'Merhaba, taksi çağırmak istiyorum. Konumum: ',
   /** Durak / buluşma noktası. Gerçek adres ve koordinatlarla değiştirin. */
   address: 'Cumhuriyet Meydanı, Artuklu / Mardin',
